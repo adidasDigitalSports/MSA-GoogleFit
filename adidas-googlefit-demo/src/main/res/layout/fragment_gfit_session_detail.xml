@@ -1,0 +1,107 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/adidas_white_background">
+
+    <LinearLayout
+        android:id="@+id/sessionHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        tools:context="com.adidas.demo.sensors.fragments.GfitSessionDetailFragment"
+        android:padding="8dp">
+
+        <!-- Session Header -->
+        <TextView
+            android:id="@+id/txtSessionName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/gfit_session_header_size"
+            android:textStyle="bold"
+            android:fontFamily="@string/gfit_session_font_family"
+            android:textColor="@color/adidas_black"
+            android:paddingTop="8dp"/>
+
+        <TextView
+            android:id="@+id/txtSessionTimestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/gfit_timestamp_header_size"
+            android:textStyle="bold"
+            android:fontFamily="@string/gfit_session_font_family"
+            android:textColor="@color/adidas_green"
+            android:paddingBottom="8dp"/>
+
+        <!-- Heart Rate view -->
+        <LinearLayout
+            android:id="@+id/heartRateContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:text="HEART RATE"
+                style="@style/ChartLabelStyle"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/hrChart"
+                style="@style/ChartStyle"/>
+        </LinearLayout>
+
+        <!-- Hustle view -->
+        <LinearLayout
+            android:id="@+id/hustleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:text="HUSTLE"
+                style="@style/ChartLabelStyle"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/hustleChart"
+                style="@style/ChartStyle"/>
+        </LinearLayout>
+
+        <!-- Quickness view -->
+        <LinearLayout
+            android:id="@+id/quicknessContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:text="QUICKNESS"
+                style="@style/ChartLabelStyle"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/quicknessChart"
+                style="@style/ChartStyle"/>
+        </LinearLayout>
+
+        <!-- Jump Height view -->
+        <LinearLayout
+            android:id="@+id/jumpHeightContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:text="JUMP HEIGHT"
+                style="@style/ChartLabelStyle"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/jumpHeightChart"
+                style="@style/ChartStyle"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</ScrollView>

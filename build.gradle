@@ -1,0 +1,13 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.14.0'
+    }
+
+    // Needed for MPAndroidChart to find all its dependencies
+    allprojects {
+        repositories { mavenCentral() }
+    }
+}

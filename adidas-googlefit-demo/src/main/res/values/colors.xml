@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="adidas_black">#292929</color>
+    <color name="adidas_green">#97ca45</color>
+    <color name="adidas_gray">#7f7f7f</color>
+    <color name="adidas_gray_light">#d1d1d1</color>
+    <color name="adidas_white_background">#f4f4f4</color>
+</resources>

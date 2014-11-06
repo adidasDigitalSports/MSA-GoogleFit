@@ -1,0 +1,33 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ChartStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/gfit_session_data_chart_height</item>
+        <item name="android:padding">@dimen/gfit_session_data_chart_padding</item>
+    </style>
+
+    <style name="ChartLabelStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textSize">@dimen/gfit_session_measurement_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@string/gfit_session_font_family</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="GreenButtonStyle">
+        <item name="android:fontFamily">roboto-light</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">168dp</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:background">@color/adidas_green</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+</resources>

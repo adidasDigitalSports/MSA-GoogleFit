@@ -1,0 +1,12 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Used by demo portion that displays data from Google Fit -->
+    <dimen name="gfit_session_header_size">28sp</dimen>
+    <dimen name="gfit_session_measurement_size">16sp</dimen>
+    <dimen name="gfit_timestamp_header_size">14sp</dimen>
+    <dimen name="gfit_session_data_chart_height">250dp</dimen>
+    <dimen name="gfit_session_data_chart_padding">8dp</dimen>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">adidas Demo</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
+    <!-- Used by demo portion that displays data from Google Fit -->
+    <string name="nav_drawer_item_sync_data">Sync Sensor</string>
+    <string name="nav_drawer_item_display_data">My Workouts</string>
+    <string name="google_fit_adidas_field_hustle">hustle</string>
+    <string name="google_fit_adidas_field_jump_height">height</string>
+    <string name="google_fit_adidas_field_quickness">quickness</string>
+    <string name="google_fit_adidas_field_heart_rate">bpm</string>
+    <string name="gfit_session_font_family">sans-serif</string>
+    <string name="google_fit_adidas_heartrate_unit">bpm</string>
+    <string name="google_fit_adidas_hustle_unit">g/min</string>
+    <string name="google_fit_adidas_quickness_unit">g/s</string>
+    <string name="google_fit_adidas_jumpheight_unit">in</string>
+    <string name="launch_app_welcome_msg">Demo illustrating how to launch sync intent with miCoach MultiSport. After successful sync you fetch data from Google Fit.</string>
+    <string name="launch_app_button_text">Launch</string>
+    <string name="launch_app_play_store_missing_msg">The Play Store app is not installed on this device. It is required to install miCoach MultiSport</string>
+    <string name="launch_app_sync_intent_not_available">The installed version of miCoach MultiSport is not compatible with this app.</string>
+    <string name="micoach_multisport_package_name">com.adidas.micoach.x_cell</string>
+    <string name="custom_intent_dialog_title">miCoach MultiSport required</string>
+    <string name="custom_intent_dialog_message">Please install miCoach MultiSport from the Google Play store.</string>
+    <string name="custom_intent_dialog_positive_button">Install</string>
+    <string name="custom_intent_dialog_negative_button">Cancel</string>
+
+</resources>
