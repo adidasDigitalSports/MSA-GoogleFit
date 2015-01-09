@@ -30,7 +30,7 @@ public abstract class GoogleFitConnectedFragment extends Fragment
         if (requestCode == REQUEST_RESOLUTION) {
             if (resultCode == Activity.RESULT_OK) {
                 authInProgress = false;
-                // Make sure the app is not already connected or attempting to connect.
+                // Make sure the app is not already connected or attempting to connect
                 if (!mClient.isConnecting() && !mClient.isConnected()) {
                     mClient.connect();
                 }
