@@ -128,7 +128,7 @@ public class GoogleFitSessionListFragment extends GoogleFitConnectedFragment
 
     private void readSession() {
         Log.d(TAG, "readSession() called!");
-        long DAY_IN_MS = TimeUnit.DAYS.toMillis(100);
+        long DAY_IN_MS = TimeUnit.DAYS.toMillis(7);
         Date now = new Date();
         // Set a range of the day, using a start time of 7 days before this moment.
         long endTime = now.getTime();
@@ -140,11 +140,14 @@ public class GoogleFitSessionListFragment extends GoogleFitConnectedFragment
                 .read(dataTypeHustle)
                 .read(dataTypeQuickness)
                 .read(DataType.TYPE_HEART_RATE_BPM)
+                .read(DataType.TYPE_DISTANCE_DELTA)
+                .read(DataType.TYPE_SPEED)
                 .readSessionsFromAllApps()
                 .build();
 
         PendingResult<SessionReadResult> pendingResult =
                 Fitness.SessionsApi.readSession(mClient, request);
+
 
         // 3. Check the result
         pendingResult.setResultCallback(

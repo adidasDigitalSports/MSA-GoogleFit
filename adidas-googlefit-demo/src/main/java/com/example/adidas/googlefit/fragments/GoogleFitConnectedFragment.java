@@ -130,6 +130,7 @@ public abstract class GoogleFitConnectedFragment extends Fragment
                         // specify the scopes of access
                 .addScope(Fitness.SCOPE_ACTIVITY_READ)
                 .addScope(Fitness.SCOPE_BODY_READ)
+                .addScope(Fitness.SCOPE_LOCATION_READ)
                         // provide callbacks
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
