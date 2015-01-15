@@ -8,17 +8,21 @@
     <string name="drawer_close">Close</string>
 
     <!-- Used by demo portion that displays data from Google Fit -->
-    <string name="nav_drawer_item_sync_data">Sync Sensor</string>
+    <string name="nav_drawer_item_sync_data">Sync Sensors</string>
     <string name="nav_drawer_item_display_data">My Workouts</string>
     <string name="google_fit_adidas_field_hustle">hustle</string>
     <string name="google_fit_adidas_field_jump_height">height</string>
     <string name="google_fit_adidas_field_quickness">quickness</string>
     <string name="google_fit_adidas_field_heart_rate">bpm</string>
+    <string name="google_fit_adidas_field_distance">distance</string>
+    <string name="google_fit_adidas_field_speed">speed</string>
     <string name="gfit_session_font_family">sans-serif</string>
     <string name="google_fit_adidas_heartrate_unit">bpm</string>
     <string name="google_fit_adidas_hustle_unit">g/min</string>
     <string name="google_fit_adidas_quickness_unit">g/s</string>
     <string name="google_fit_adidas_jumpheight_unit">in</string>
+    <string name="google_fit_adidas_distance_unit">m</string>
+    <string name="google_fit_adidas_speed_unit">km/h</string>
     <string name="launch_app_welcome_msg">Demo illustrating how to launch sync intent with miCoach MultiSport. After successful sync you fetch data from Google Fit.</string>
     <string name="launch_app_button_text">Launch</string>
     <string name="launch_app_play_store_missing_msg">The Play Store app is not installed on this device. It is required to install miCoach MultiSport</string>

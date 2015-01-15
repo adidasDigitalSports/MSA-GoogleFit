@@ -102,6 +102,39 @@
                 style="@style/ChartStyle"/>
         </LinearLayout>
 
+        <!-- Distance view -->
+        <LinearLayout
+            android:id="@+id/distanceContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:text="DISTANCE"
+                style="@style/ChartLabelStyle"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/distanceChart"
+                style="@style/ChartStyle"/>
+        </LinearLayout>
+
+        <!-- Speed view -->
+        <LinearLayout
+            android:id="@+id/speedContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:text="SPEED"
+                style="@style/ChartLabelStyle"/>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/speedChart"
+                style="@style/ChartStyle"/>
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

@@ -1,7 +1,11 @@
 package com.example.adidas.googlefit.fragments;
 
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.fitness.Fitness;
+import com.google.android.gms.fitness.data.Bucket;
 import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.DataSet;
+import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.data.Session;
 
@@ -13,12 +17,15 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.Legend;
 import com.github.mikephil.charting.utils.XLabels;
+import com.google.android.gms.fitness.request.DataReadRequest;
+import com.google.android.gms.fitness.result.DataReadResult;
 
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -27,8 +34,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class GoogleFitSessionDetailFragment extends Fragment {
@@ -46,11 +55,15 @@ public class GoogleFitSessionDetailFragment extends Fragment {
     private LineChart mHustleChart;
     private LineChart mQuicknessChart;
     private LineChart mJumpHeightChart;
+    private LineChart mDistanceChart;
+    private LineChart mSpeedChart;
 
     private String mHr_field_name;
     private String mHustle_field_name;
     private String mJump_height_field_name;
     private String mQuickness_field_name;
+    private String mDistance_field_name;
+    private String mSpeed_field_name;
 
     private Activity mActivity;
 
@@ -96,6 +109,8 @@ public class GoogleFitSessionDetailFragment extends Fragment {
         mHustleChart = (LineChart) v.findViewById(R.id.hustleChart);
         mQuicknessChart = (LineChart) v.findViewById(R.id.quicknessChart);
         mJumpHeightChart = (LineChart) v.findViewById(R.id.jumpHeightChart);
+        mDistanceChart = (LineChart) v.findViewById(R.id.distanceChart);
+        mSpeedChart = (LineChart) v.findViewById(R.id.speedChart);
 
         return v;
     }
@@ -116,6 +131,12 @@ public class GoogleFitSessionDetailFragment extends Fragment {
         mQuickness_field_name = mActivity.getResources()
                 .getString(
                         R.string.google_fit_adidas_field_quickness);
+        mDistance_field_name = mActivity.getResources()
+                .getString(
+                        R.string.google_fit_adidas_field_distance);
+        mSpeed_field_name = mActivity.getResources()
+                .getString(
+                        R.string.google_fit_adidas_field_speed);
 
         Log.d(TAG, "The number of data sets is: " + mDataSetsList.size());
         populateCharts();
@@ -136,6 +157,10 @@ public class GoogleFitSessionDetailFragment extends Fragment {
         ArrayList<String> quicknessXValues = new ArrayList<String>();
         ArrayList<Entry> jumpHeightYValues = new ArrayList<Entry>();
         ArrayList<String> jumpHeightXValues = new ArrayList<String>();
+        ArrayList<Entry> distanceYValues = new ArrayList<Entry>();
+        ArrayList<String> distanceXValues = new ArrayList<String>();
+        ArrayList<Entry> speedYValues = new ArrayList<Entry>();
+        ArrayList<String> speedXValues = new ArrayList<String>();
 
         for (DataSet dataSet : mDataSetsList) {
 
@@ -143,34 +168,47 @@ public class GoogleFitSessionDetailFragment extends Fragment {
             int hustleCounter = 0;
             int quicknessCounter = 0;
             int jumpHeightCounter = 0;
+            int distanceCounter = 0;
+            int speedCounter = 0;
             for (DataPoint dp : dataSet.getDataPoints()) {
                 for (Field field : dp.getDataType().getFields()) {
-                    String dpTimeStamp = DateUtils.formatDateTime(mActivity, dp.getTimestamp(
-                                    TimeUnit.MILLISECONDS),
-                            DateUtils.FORMAT_ABBREV_MONTH | DateUtils.FORMAT_SHOW_DATE
-                                    | DateUtils.FORMAT_SHOW_YEAR
-                                    | DateUtils.FORMAT_SHOW_TIME);
+                    if (field.getName()
+                            .contains("distance")) {  // Save Distance data
+                        distanceYValues.add(
+                                new Entry(dp.getValue(field).asFloat(), distanceCounter++));
+                        String dpTimeStamp = formatTimeStamp(dp.getStartTime(TimeUnit.MILLISECONDS));
+                        distanceXValues.add(dpTimeStamp);
+                    } else {
+                        String dpTimeStamp = formatTimeStamp(dp.getTimestamp(TimeUnit.MILLISECONDS));
 
-                    // Save chart data
-                    if (field.getName().contains(mHr_field_name)) { // Save Heart Rate data
-                        heartRateYValues.add(new Entry(dp.getValue(field).asFloat(), hrCounter++));
-                        heartRateXValues.add(dpTimeStamp);
-                    } else if (field.getName().contains(mHustle_field_name)) {  // Save Hustle data
-                        hustleYValues.add(new Entry(dp.getValue(field).asFloat(), hustleCounter++));
-                        hustleXValues.add(dpTimeStamp);
-                    } else if (field.getName()
-                            .contains(mQuickness_field_name)) {  // Save Quickness data
-                        quicknessYValues.add(
-                                new Entry(dp.getValue(field).asFloat(), quicknessCounter++));
-                        quicknessXValues.add(dpTimeStamp);
-                    } else if (field.getName()
-                            .contains(mJump_height_field_name)) {  // Save Jump Height data
-                        jumpHeightYValues.add(
-                                new Entry(dp.getValue(field).asFloat(), jumpHeightCounter++));
-                        jumpHeightXValues.add(dpTimeStamp);
+                        // Save chart data
+                        if (field.getName().contains(mHr_field_name)) { // Save Heart Rate data
+                            heartRateYValues.add(new Entry(dp.getValue(field).asFloat(), hrCounter++));
+                            heartRateXValues.add(dpTimeStamp);
+                        } else if (field.getName().contains(mHustle_field_name)) {  // Save Hustle data
+                            hustleYValues.add(new Entry(dp.getValue(field).asFloat(), hustleCounter++));
+                            hustleXValues.add(dpTimeStamp);
+                        } else if (field.getName()
+                                .contains(mQuickness_field_name)) {  // Save Quickness data
+                            quicknessYValues.add(
+                                    new Entry(dp.getValue(field).asFloat(), quicknessCounter++));
+                            quicknessXValues.add(dpTimeStamp);
+                        } else if (field.getName()
+                                .contains(mJump_height_field_name)) {  // Save Jump Height data
+                            jumpHeightYValues.add(
+                                    new Entry(dp.getValue(field).asFloat(), jumpHeightCounter++));
+                            jumpHeightXValues.add(dpTimeStamp);
+                        } else if (field.getName()
+                                .contains(mSpeed_field_name)) {  // Save Speed data
+                            speedYValues.add(
+                                    new Entry(dp.getValue(field).asFloat(), speedCounter++));
+                            speedXValues.add(dpTimeStamp);
+                        }
                     }
                 }
             }
+
+            Log.d(TAG, "distance count: " + distanceCounter);
         }
         // Create and display a chart for each workout statistic
         setChartData(mHeartRateChart, heartRateXValues, heartRateYValues,
@@ -181,6 +219,10 @@ public class GoogleFitSessionDetailFragment extends Fragment {
                 getString(R.string.google_fit_adidas_quickness_unit)).invalidate();
         setChartData(mJumpHeightChart, jumpHeightXValues, jumpHeightYValues,
                 getString(R.string.google_fit_adidas_jumpheight_unit)).invalidate();
+        setChartData(mDistanceChart, distanceXValues, distanceYValues,
+                getString(R.string.google_fit_adidas_distance_unit)).invalidate();
+        setChartData(mSpeedChart, speedXValues, speedYValues,
+                getString(R.string.google_fit_adidas_speed_unit)).invalidate();
     }
 
     private LineChart setChartData(LineChart chart,
@@ -248,4 +290,11 @@ public class GoogleFitSessionDetailFragment extends Fragment {
         return chart;
     }
 
+    private String formatTimeStamp(long time) {
+        String dpTimeStamp = DateUtils.formatDateTime(mActivity, time,
+                DateUtils.FORMAT_ABBREV_MONTH | DateUtils.FORMAT_SHOW_DATE
+                        | DateUtils.FORMAT_SHOW_YEAR
+                        | DateUtils.FORMAT_SHOW_TIME);
+        return dpTimeStamp;
+    }
 }
