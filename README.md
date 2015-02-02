@@ -2,7 +2,7 @@
 
 This demo app is intended to showcase how third-party developers can integrate their Android app with [miCoach MultiSport](https://play.google.com/store/apps/details?id=com.adidas.micoach.x_cell) and [Google Fit](https://developers.google.com/fit/) for the [Google Fit Developer Challenge](https://developers.google.com/fit/challenge).  Specifically, with this demo app you will be able to achieve the following:
 
-1. Initiate a sync between an [adidas X_CELL](http://micoach.adidas.com/x_cell/) or an [adidas SPEED_CELL](http://http://micoach.adidas.com/speed_cell/) sensor and miCoach MultiSport, which saves workout data to Google Fit.
+1. Initiate a sync between an [adidas X_CELL](http://micoach.adidas.com/x_cell/) or an [adidas SPEED_CELL](http://micoach.adidas.com/speed_cell/) sensor and miCoach MultiSport, which saves workout data to Google Fit.
 2. View the miCoach MultiSport workout data as saved on Google Fit.
 
 # Developing Your App for adidas & Google Fit Integration
