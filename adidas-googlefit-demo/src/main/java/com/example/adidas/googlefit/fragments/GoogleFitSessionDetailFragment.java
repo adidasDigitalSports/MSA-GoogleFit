@@ -1,11 +1,7 @@
 package com.example.adidas.googlefit.fragments;
 
-import com.google.android.gms.common.api.PendingResult;
-import com.google.android.gms.fitness.Fitness;
-import com.google.android.gms.fitness.data.Bucket;
 import com.google.android.gms.fitness.data.DataPoint;
 import com.google.android.gms.fitness.data.DataSet;
-import com.google.android.gms.fitness.data.DataType;
 import com.google.android.gms.fitness.data.Field;
 import com.google.android.gms.fitness.data.Session;
 
@@ -17,15 +13,12 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.utils.Legend;
 import com.github.mikephil.charting.utils.XLabels;
-import com.google.android.gms.fitness.request.DataReadRequest;
-import com.google.android.gms.fitness.result.DataReadResult;
 
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -34,10 +27,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
 public class GoogleFitSessionDetailFragment extends Fragment {
@@ -173,7 +164,7 @@ public class GoogleFitSessionDetailFragment extends Fragment {
             for (DataPoint dp : dataSet.getDataPoints()) {
                 for (Field field : dp.getDataType().getFields()) {
                     if (field.getName()
-                            .contains("distance")) {  // Save Distance data
+                            .contains(mDistance_field_name)) {  // Save Distance data
                         distanceYValues.add(
                                 new Entry(dp.getValue(field).asFloat(), distanceCounter++));
                         String dpTimeStamp = formatTimeStamp(dp.getStartTime(TimeUnit.MILLISECONDS));
@@ -207,8 +198,6 @@ public class GoogleFitSessionDetailFragment extends Fragment {
                     }
                 }
             }
-
-            Log.d(TAG, "distance count: " + distanceCounter);
         }
         // Create and display a chart for each workout statistic
         setChartData(mHeartRateChart, heartRateXValues, heartRateYValues,
